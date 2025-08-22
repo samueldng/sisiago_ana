@@ -1,0 +1,10 @@
+// Script simples para testar API de produtos vencidos
+console.log('🧪 Testando API de produtos vencidos...')
+console.log('📡 Fazendo requisição para: http://localhost:3000/api/products/expired?days=7')
+console.log('\n⚠️ Para testar manualmente, execute:')
+console.log('curl "http://localhost:3000/api/products/expired?days=7"')
+console.log('\n🌐 Ou abra no navegador:')
+console.log('http://localhost:3000/api/products/expired?days=7')
+console.log('\n✅ Script executado com sucesso!')
+console.log('📝 Verifique o dashboard em: http://localhost:3000')
+console.log('🔍 O componente de alertas deve aparecer se houver produtos vencidos/próximos ao vencimento.')

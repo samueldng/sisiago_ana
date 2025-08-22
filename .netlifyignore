@@ -1,0 +1,28 @@
+node_modules
+build
+dist
+.git
+.trae
+.next
+*.log
+*.md
+*.sql
+test-*.js
+test-*.html
+tsconfig.tsbuildinfo
+create-*.sql
+enable-*.sql
+simple-*.sql
+seed-data.js
+BUGFIXES.md
+DEPLOY*.md
+README*.md
+SCANNER_IMPROVEMENTS.md
+TESTE-SCANNER-DEBUG.md
+
+# Arquivos específicos do Vercel
+.vercel
+vercel.json
+
+# Arquivos de cache do Netlify
+.netlify

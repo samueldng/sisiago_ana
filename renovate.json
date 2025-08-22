@@ -1,0 +1,105 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":automergeDigest",
+    ":automergeBranch"
+  ],
+  "timezone": "America/Sao_Paulo",
+  "schedule": ["before 6am on monday"],
+  "labels": ["dependencies"],
+  "assignees": ["@me"],
+  "reviewers": ["@me"],
+  "packageRules": [
+    {
+      "groupName": "Next.js",
+      "matchPackageNames": ["next"],
+      "schedule": ["before 6am on the first day of the month"]
+    },
+    {
+      "groupName": "React",
+      "matchPackageNames": ["react", "react-dom", "@types/react", "@types/react-dom"],
+      "schedule": ["before 6am on the first day of the month"]
+    },
+    {
+      "groupName": "TypeScript",
+      "matchPackageNames": ["typescript", "@types/node"],
+      "schedule": ["before 6am on the first day of the month"]
+    },
+    {
+      "groupName": "Testing",
+      "matchPackageNames": ["jest", "@testing-library/*", "playwright"],
+      "automerge": true
+    },
+    {
+      "groupName": "Linting",
+      "matchPackageNames": ["eslint", "prettier", "@typescript-eslint/*"],
+      "automerge": true
+    },
+    {
+      "groupName": "Tailwind CSS",
+      "matchPackageNames": ["tailwindcss", "@tailwindcss/*"],
+      "automerge": true
+    },
+    {
+      "groupName": "Radix UI",
+      "matchPackageNames": ["@radix-ui/*"],
+      "automerge": true
+    },
+    {
+      "groupName": "ZXing",
+      "matchPackageNames": ["@zxing/library"],
+      "automerge": false,
+      "labels": ["scanner", "critical-review"]
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true,
+      "schedule": ["before 6am on monday"]
+    },
+    {
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": ["minor"],
+      "automerge": false,
+      "schedule": ["before 6am on monday"]
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "automerge": false,
+      "schedule": ["before 6am on the first day of the month"],
+      "labels": ["major-update", "needs-review"]
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "automerge": true,
+    "schedule": ["at any time"]
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "schedule": ["before 6am on monday"]
+  },
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "commitMessagePrefix": "chore(deps):",
+  "semanticCommitType": "chore",
+  "semanticCommitScope": "deps",
+  "ignoreDeps": [],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/vendor/**",
+    "**/.next/**",
+    "**/dist/**",
+    "**/build/**"
+  ],
+  "enabledManagers": ["npm"],
+  "rangeStrategy": "bump",
+  "bumpVersion": "patch"
+}

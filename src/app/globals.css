@@ -1,0 +1,231 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 94.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Estilos customizados para o PDV */
+@layer components {
+  .pdv-grid {
+    @apply flex flex-col lg:grid lg:grid-cols-3 gap-4 min-h-screen p-2 lg:p-4;
+  }
+  
+  .pdv-products {
+    @apply lg:col-span-2 flex-1 min-h-0 overflow-hidden;
+  }
+  
+  .pdv-cart {
+    @apply lg:col-span-1 flex flex-col h-auto lg:h-full max-h-96 lg:max-h-none;
+  }
+  
+  .product-card {
+    @apply p-3 lg:p-4 border rounded-lg hover:shadow-md transition-all duration-200 cursor-pointer bg-white hover:bg-gray-50 active:scale-95;
+  }
+  
+  .cart-item {
+    @apply flex items-center gap-2 p-2 lg:p-3 border-b last:border-b-0 bg-white;
+  }
+  
+  .mobile-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-white border-t lg:hidden z-40 safe-area-pb;
+  }
+  
+  .scanner-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4;
+  }
+  
+  .qr-code-container {
+    @apply flex flex-col items-center justify-center p-6 lg:p-8 bg-white rounded-lg max-w-sm w-full;
+  }
+  
+  .mobile-header {
+    @apply sticky top-0 bg-white border-b z-30 lg:hidden;
+  }
+  
+  .mobile-optimized {
+    @apply text-sm lg:text-base;
+  }
+  
+  .touch-friendly {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Animações customizadas */
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce 2s infinite;
+  }
+}
+
+/* Animação personalizada */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Sugestões de busca */
+.search-suggestions {
+  @apply absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto;
+}
+
+.search-suggestion-item {
+  @apply flex items-center justify-between p-3 hover:bg-gray-50 cursor-pointer border-b last:border-b-0 transition-colors;
+}
+
+@media (max-width: 640px) {
+  .search-suggestions {
+    @apply max-h-48;
+  }
+  
+  .search-suggestion-item {
+    @apply p-2;
+  }
+}
+
+/* Estilos para impressão */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
+  
+  body {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  
+  .receipt {
+    width: 80mm;
+    margin: 0 auto;
+    padding: 10px;
+  }
+}
+
+/* Otimizações para dispositivos móveis */
+.mobile-optimized {
+  @apply text-sm;
+}
+
+@media (max-width: 640px) {
+  .mobile-optimized {
+    @apply text-xs;
+  }
+}
+
+/* Botões touch-friendly para dispositivos móveis */
+.touch-friendly {
+  @apply min-h-[44px] min-w-[44px] touch-manipulation;
+}
+
+/* Header responsivo */
+@media (max-width: 768px) {
+  .mobile-header {
+    @apply px-2 py-2;
+  }
+  
+  .mobile-header .flex {
+    @apply space-x-1;
+  }
+  
+  .mobile-header button {
+    @apply px-2 py-1 text-xs;
+  }
+}
+
+/* Melhorias para sugestões de busca */
+.search-suggestions {
+  @apply absolute top-full left-0 right-0 bg-white border border-gray-200 rounded-md shadow-lg z-50 max-h-60 overflow-y-auto;
+}
+
+.search-suggestion-item {
+  @apply px-3 py-2 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0;
+}
+
+.search-suggestion-item:hover {
+  @apply bg-gray-50;
+}
+
+/* Responsividade para produtos */
+@media (max-width: 640px) {
+  .product-grid {
+    @apply grid-cols-1 gap-2;
+  }
+  
+  .product-card {
+    @apply p-3;
+  }
+}

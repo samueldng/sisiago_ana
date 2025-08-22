@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Executando verificações pré-commit..."
+
+# Executar lint-staged para arquivos modificados
+npx lint-staged
+
+# Verificar tipos TypeScript
+echo "🔧 Verificando tipos TypeScript..."
+npm run type-check
+
+if [ $? -ne 0 ]; then
+  echo "❌ Erro na verificação de tipos. Commit cancelado."
+  exit 1
+fi
+
+# Executar testes unitários
+echo "🧪 Executando testes unitários..."
+npm run test:ci
+
+if [ $? -ne 0 ]; then
+  echo "❌ Testes falharam. Commit cancelado."
+  exit 1
+fi
+
+echo "✅ Todas as verificações passaram!"

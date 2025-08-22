@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste de Câmera</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>Teste de Acesso à Câmera</h1>
+    <button id="startBtn">Iniciar Câmera</button>
+    <button id="stopBtn">Parar Câmera</button>
+    <br><br>
+    <video id="video" width="640" height="480" autoplay></video>
+    <br><br>
+    <div id="status"></div>
+    <div id="error"></div>
+
+    <script>
+        const video = document.getElementById('video');
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const status = document.getElementById('status');
+        const error = document.getElementById('error');
+        let stream = null;
+
+        startBtn.addEventListener('click', async () => {
+            try {
+                status.textContent = 'Solicitando acesso à câmera...';
+                error.textContent = '';
+                
+                // Verificar se getUserMedia está disponível
+                if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                    throw new Error('getUserMedia não suportado neste navegador');
+                }
+                
+                // Solicitar acesso à câmera
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        facingMode: 'environment' // Tentar câmera traseira
+                    } 
+                });
+                
+                video.srcObject = stream;
+                status.textContent = 'Câmera ativa!';
+                
+            } catch (err) {
+                console.error('Erro:', err);
+                error.textContent = `Erro: ${err.name} - ${err.message}`;
+                status.textContent = 'Falha ao acessar câmera';
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                video.srcObject = null;
+                stream = null;
+                status.textContent = 'Câmera parada';
+            }
+        });
+
+        // Verificar permissões
+        if ('permissions' in navigator) {
+            navigator.permissions.query({name: 'camera'}).then(result => {
+                status.textContent += ` | Permissão: ${result.state}`;
+            }).catch(err => {
+                status.textContent += ' | Não foi possível verificar permissões';
+            });
+        }
+    </script>
+</body>
+</html>

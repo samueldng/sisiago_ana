@@ -1,0 +1,7 @@
+# Redirecionamentos para o Netlify
+
+# Redirecionar API routes para as funções do Netlify
+/api/*  /.netlify/functions/api/:splat  200
+
+# Fallback para SPA - deixar o Next.js lidar com as rotas
+/*    /index.html   200

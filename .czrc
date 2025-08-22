@@ -1,0 +1,71 @@
+{
+  "path": "cz-conventional-changelog",
+  "types": {
+    "feat": {
+      "description": "Uma nova funcionalidade",
+      "title": "Features"
+    },
+    "fix": {
+      "description": "Uma correção de bug",
+      "title": "Bug Fixes"
+    },
+    "docs": {
+      "description": "Mudanças apenas na documentação",
+      "title": "Documentation"
+    },
+    "style": {
+      "description": "Mudanças que não afetam o significado do código (espaços em branco, formatação, etc)",
+      "title": "Styles"
+    },
+    "refactor": {
+      "description": "Uma mudança de código que não corrige um bug nem adiciona uma funcionalidade",
+      "title": "Code Refactoring"
+    },
+    "perf": {
+      "description": "Uma mudança de código que melhora a performance",
+      "title": "Performance Improvements"
+    },
+    "test": {
+      "description": "Adicionando testes ausentes ou corrigindo testes existentes",
+      "title": "Tests"
+    },
+    "build": {
+      "description": "Mudanças que afetam o sistema de build ou dependências externas",
+      "title": "Builds"
+    },
+    "ci": {
+      "description": "Mudanças nos arquivos e scripts de configuração de CI",
+      "title": "Continuous Integrations"
+    },
+    "chore": {
+      "description": "Outras mudanças que não modificam arquivos src ou test",
+      "title": "Chores"
+    },
+    "revert": {
+      "description": "Reverte um commit anterior",
+      "title": "Reverts"
+    }
+  },
+  "scopes": [
+    "scanner",
+    "pdv",
+    "produtos",
+    "vendas",
+    "clientes",
+    "pagamentos",
+    "relatorios",
+    "auth",
+    "api",
+    "ui",
+    "database",
+    "config",
+    "deps"
+  ],
+  "allowCustomScopes": true,
+  "allowBreakingChanges": ["feat", "fix"],
+  "skipQuestions": ["body"],
+  "subjectLimit": 100,
+  "breaklineChar": "|",
+  "footerPrefix": "ISSUES CLOSED:",
+  "askForBreakingChangeFirst": true
+}
