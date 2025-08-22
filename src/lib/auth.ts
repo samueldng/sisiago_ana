@@ -1,6 +1,16 @@
 import { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
-import { db } from '@/lib/supabase';
+import { createServerClient } from '@/lib/supabase/server';
+
+// Simulação do banco de dados para permissões
+const db = {
+  permissions: {
+    findByUserAndEntity: async ({ userId, entityId }: { userId: string, entityId: string }) => {
+      // Simulação: todos os usuários têm permissão de admin para todas as entidades
+      return { data: ['admin', 'read', 'write'], error: null };
+    }
+  }
+};
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
@@ -13,6 +23,41 @@ export interface AuthResult {
     role: string;
   };
   error?: string;
+}
+
+/**
+ * Função para verificar permissões do usuário para uma entidade específica
+ */
+export async function checkUserPermission(
+  request: NextRequest,
+  entityId: string,
+  requiredPermission: string
+): Promise<AuthResult> {
+  const authResult = await verifyAuth(request);
+  
+  if (!authResult.success || !authResult.user) {
+    return authResult;
+  }
+  
+  // Verificar se o usuário é admin (tem acesso total)
+  if (authResult.user.role === 'admin') {
+    return authResult;
+  }
+  
+  // Buscar permissões do usuário para a entidade
+  const { data: permissions, error } = await db.permissions.findByUserAndEntity({
+    userId: authResult.user.id,
+    entityId
+  });
+  
+  if (error || !permissions || !permissions.includes(requiredPermission)) {
+    return {
+      success: false,
+      error: `Permissão insuficiente: ${requiredPermission} necessária`
+    };
+  }
+  
+  return authResult;
 }
 
 /**

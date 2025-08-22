@@ -80,8 +80,8 @@ export async function GET(request: NextRequest) {
     }
 
     // Verificar permissão de administrador
-    const hasPermission = await checkUserPermission(user.id, 'admin')
-    if (!hasPermission) {
+    const authResult = await checkUserPermission(request, 'audit-metrics', 'admin')
+    if (!authResult.success) {
       return NextResponse.json({ error: 'Acesso negado' }, { status: 403 })
     }
 
@@ -304,8 +304,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Verificar permissão de administrador
-    const hasPermission = await checkUserPermission(user.id, 'admin')
-    if (!hasPermission) {
+    const authResult = await checkUserPermission(request, 'audit-metrics', 'admin')
+    if (!authResult.success) {
       return NextResponse.json({ error: 'Acesso negado' }, { status: 403 })
     }
 

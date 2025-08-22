@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
@@ -10,7 +10,7 @@ if (!supabaseUrl || !supabaseServiceKey) {
 
 // Cliente para uso no servidor com service role key
 export const createServerClient = () => {
-  return createClient(supabaseUrl, supabaseServiceKey, {
+  return createSupabaseClient(supabaseUrl, supabaseServiceKey, {
     auth: {
       autoRefreshToken: false,
       persistSession: false
@@ -22,7 +22,7 @@ export const createServerClient = () => {
 export const createServerClientWithAuth = () => {
   const cookieStore = cookies()
   
-  return createClient(
+  return createSupabaseClient(
     supabaseUrl,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
@@ -42,3 +42,6 @@ export const createServerClientWithAuth = () => {
 // Export padrão para compatibilidade
 export const supabase = createServerClient()
 export default supabase
+
+// Cliente para uso em APIs de auditoria
+export const createClient = createServerClient
