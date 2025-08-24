@@ -9,6 +9,21 @@ const db = {
       // Simulação: todos os usuários têm permissão de admin para todas as entidades
       return { data: ['admin', 'read', 'write'], error: null };
     }
+  },
+  users: {
+    findById: async (userId: string) => {
+      // Simulação: retornar um usuário fictício para qualquer ID
+      return { 
+        data: {
+          id: userId,
+          email: 'admin@sisiago.com',
+          name: 'Administrador',
+          role: 'admin',
+          password: 'hashed_password_here'
+        }, 
+        error: null 
+      };
+    }
   }
 };
 

@@ -17,7 +17,7 @@
     "test:e2e": "playwright test",
     "analyze": "cross-env ANALYZE=true next build",
     "db:seed": "node migrate-to-postgres.js",
-    "deploy:netlify": "netlify deploy --prod",
+    "deploy:vercel": "vercel --prod",
     "setup:dev": "npm install && npm run db:seed"
   },
   "dependencies": {

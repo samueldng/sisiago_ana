@@ -192,7 +192,7 @@ src/
 ## 📚 Documentação
 
 - **[Documentação Técnica Completa](./DOCUMENTACAO_TECNICA_COMPLETA.md)** - Todas as correções e implementações realizadas
-- **[Guia de Deploy](./netlify.toml)** - Configuração para deploy no Netlify
+- **[Guia de Deploy](./GUIA_DEPLOY_GITHUB_VERCEL.md)** - Instruções para GitHub e Vercel
 - **[Resumo Executivo](./RESUMO_EXECUTIVO_FINAL.md)** - Visão geral do projeto
 
 ## 🔧 Estado Atual do Projeto
