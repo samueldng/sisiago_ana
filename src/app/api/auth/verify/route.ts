@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import jwt from 'jsonwebtoken';
+import { jwtVerify } from 'jose';
 
 // Garantir que o JWT_SECRET esteja definido
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const JWT_SECRET = new TextEncoder().encode(
+  process.env.JWT_SECRET || 'your-secret-key'
+);
 
 // Log para debug em produção
 console.log('🔐 JWT_SECRET configurado:', JWT_SECRET ? 'Sim' : 'Não');
@@ -28,7 +30,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Verificar o token JWT
-    const decoded = jwt.verify(token, JWT_SECRET) as any;
+    const { payload: decoded } = await jwtVerify(token, JWT_SECRET);
     
     // Simular dados do usuário (em produção, buscar do banco de dados)
     const user = {
