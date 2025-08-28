@@ -12,8 +12,15 @@ export async function GET(request: NextRequest) {
   try {
     const cookieStore = cookies();
     const token = cookieStore.get('auth-token')?.value;
+    
+    // Debug: listar todos os cookies disponíveis
+    const allCookies = cookieStore.getAll();
+    console.log('🍪 Todos os cookies disponíveis:', allCookies.map(c => ({ name: c.name, hasValue: !!c.value })));
+    console.log('🔍 Cookie auth-token encontrado:', !!token);
+    console.log('🔍 Valor do token (primeiros 20 chars):', token ? token.substring(0, 20) + '...' : 'null');
 
     if (!token) {
+      console.log('❌ Token não encontrado nos cookies');
       return NextResponse.json(
         { error: 'Token não encontrado' },
         { status: 401 }

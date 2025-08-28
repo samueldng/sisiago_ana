@@ -137,19 +137,29 @@ export async function POST(request: NextRequest) {
     // Obter o domínio da requisição para configurar o cookie corretamente
     const host = request.headers.get('host') || '';
     const isLocalhost = host.includes('localhost') || host.includes('127.0.0.1');
-    const domain = isLocalhost ? undefined : host.includes('.') ? host.split(':')[0] : undefined;
     
     console.log('🌐 Host detectado:', host);
-    console.log('🌐 Domínio para cookie:', domain || 'default');
+    console.log('🌐 É localhost:', isLocalhost);
     
-    response.cookies.set('auth-token', token, {
+    // Configuração do cookie otimizada para Netlify
+    const cookieOptions: any = {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       maxAge: 24 * 60 * 60, // 24 horas
-      path: '/', // Garantir que o cookie seja válido para todo o site
-      domain: domain // Configurar domínio automaticamente
-    });
+      path: '/' // Garantir que o cookie seja válido para todo o site
+    };
+    
+    // Não definir domínio para Netlify - deixar o navegador gerenciar
+    if (isLocalhost) {
+      // Para localhost, não definir domínio
+      console.log('🍪 Configurando cookie para localhost');
+    } else {
+      // Para produção (Netlify), não definir domínio explicitamente
+      console.log('🍪 Configurando cookie para produção (sem domínio explícito)');
+    }
+    
+    response.cookies.set('auth-token', token, cookieOptions);
     
     console.log('✅ Cookie definido com sucesso');
 
