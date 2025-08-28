@@ -171,7 +171,6 @@ const nextConfig = {
   },
   
   // Configurações de exportação
-  trailingSlash: false,
   skipTrailingSlashRedirect: true,
   
   // Configurações de logging

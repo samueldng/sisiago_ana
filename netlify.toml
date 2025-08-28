@@ -3,7 +3,7 @@
 [build]
   command = "npm run build"
   publish = ".next"
-  environment = { NODE_VERSION = "18" }
+  environment = { NODE_VERSION = "20" }
 
 # Configuração para Next.js no Netlify
 # As rotas de API são automaticamente gerenciadas pelo Next.js
