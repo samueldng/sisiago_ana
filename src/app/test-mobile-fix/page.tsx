@@ -1,11 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { CheckCircle, XCircle, AlertCircle, Wifi, WifiOff, RefreshCw } from 'lucide-react'
 import { Product } from '@/types'
+import { useState, useEffect } from 'react'
 
 interface TestResult {
   name: string
@@ -14,7 +15,8 @@ interface TestResult {
   details?: string
 }
 
-export default function TestMobileFix() {
+// Componente que usa navigator - será carregado dinamicamente
+function TestMobileFixContent() {
   const [tests, setTests] = useState<TestResult[]>([])
   const [isRunning, setIsRunning] = useState(false)
   const [products, setProducts] = useState<Product[]>([])
@@ -317,3 +319,18 @@ export default function TestMobileFix() {
     </div>
   )
 }
+
+// Componente principal que carrega o conteúdo dinamicamente sem SSR
+const TestMobileFix = dynamic(() => Promise.resolve(TestMobileFixContent), {
+  ssr: false,
+  loading: () => (
+    <div className="min-h-screen bg-gray-50 p-4 flex items-center justify-center">
+      <div className="text-center">
+        <RefreshCw className="w-8 h-8 animate-spin mx-auto mb-4 text-blue-500" />
+        <p className="text-gray-600">Carregando testes...</p>
+      </div>
+    </div>
+  )
+})
+
+export default TestMobileFix

@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 import { z } from 'zod'
 
+export const dynamic = 'force-dynamic'
+
 // Schema de validação para parâmetros de relatório
 const reportParamsSchema = z.object({
   tipo: z.enum(['vendas', 'produtos', 'financeiro', 'clientes'], {
