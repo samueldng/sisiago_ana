@@ -5,6 +5,10 @@
   publish = ".next"
   environment = { NODE_VERSION = "20" }
 
+# Plugin oficial do Netlify para Next.js
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 # Configuração para Next.js no Netlify
 # As rotas de API são automaticamente gerenciadas pelo Next.js
 

@@ -1,7 +1,7 @@
-# Redirecionamentos para o Netlify
+# Redirecionamentos para o Netlify com Next.js
 
-# Redirecionamentos específicos para Next.js
-/api/*  /.netlify/functions/:splat  200
+# Com o plugin @netlify/plugin-nextjs, as API routes são tratadas automaticamente
+# Não precisamos de redirecionamentos específicos para /api/*
 
 # Fallback para Next.js - deixar o Next.js lidar com as rotas
 /*    /index.html   200
