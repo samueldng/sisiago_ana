@@ -137,9 +137,9 @@ export default function LoginPage() {
 
     try {
       console.log('🔐 LoginPage: Tentando fazer login com:', formData.email);
-      const success = await login(formData.email, formData.password);
+      const result = await login(formData.email, formData.password);
 
-      if (success) {
+      if (result.success) {
         console.log('✅ LoginPage: Login bem-sucedido');
         // Mostrar sugestão de PWA se disponível
         if (deferredPrompt) {
@@ -149,8 +149,8 @@ export default function LoginPage() {
           router.replace('/');
         }
       } else {
-        console.log('❌ LoginPage: Login falhou - credenciais inválidas');
-        setApiError('Email ou senha incorretos. Verifique suas credenciais.');
+        console.log('❌ LoginPage: Login falhou -', result.error);
+        setApiError(result.error || 'Email ou senha incorretos. Verifique suas credenciais.');
       }
     } catch (error) {
       console.error('❌ LoginPage: Erro no login:', error);
