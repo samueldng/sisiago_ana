@@ -9,7 +9,7 @@ const JWT_SECRET = new TextEncoder().encode(
 const publicRoutes = ['/login', '/api/auth/login', '/api/auth/logout', '/api/auth/debug-headers'];
 
 // Rotas da API que sempre devem passar pelo middleware (para adicionar headers)
-const apiRoutes = ['/api/auth/verify', '/api/audit-logs', '/api/users'];
+const apiRoutes = ['/api/audit-logs', '/api/users'];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -103,6 +103,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|api/auth).*)',
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.svg|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.ico|.*\\.css|.*\\.js|.*\\.ts|.*\\.json|@vite).*)',
   ],
 };

@@ -50,18 +50,18 @@ export default function LoginPage() {
     setIsMounted(true);
   }, []);
 
-  // Redirecionar se já estiver autenticado (apenas no cliente)
-  useEffect(() => {
-    if (isMounted && !authLoading && isAuthenticated) {
-      console.log('✅ LoginPage: Usuário já autenticado, redirecionando para /');
-      // Usar window.location.href como fallback para problemas no Netlify
-      if (typeof window !== 'undefined') {
-        window.location.href = '/';
-      } else {
-        router.replace('/');
-      }
-    }
-  }, [isAuthenticated, authLoading, router, isMounted]);
+  // Comentado: Este useEffect estava causando loops de redirecionamento
+  // useEffect(() => {
+  //   if (isMounted && !authLoading && isAuthenticated) {
+  //     console.log('✅ LoginPage: Usuário já autenticado, redirecionando para /');
+  //     // Usar window.location.href como fallback para problemas no Netlify
+  //     if (typeof window !== 'undefined') {
+  //       window.location.href = '/';
+  //     } else {
+  //       router.replace('/');
+  //     }
+  //   }
+  // }, [isAuthenticated, authLoading, router, isMounted]);
 
   // Detectar se pode instalar como PWA (apenas no cliente)
   useEffect(() => {
