@@ -54,7 +54,12 @@ export default function LoginPage() {
   useEffect(() => {
     if (isMounted && !authLoading && isAuthenticated) {
       console.log('✅ LoginPage: Usuário já autenticado, redirecionando para /');
-      router.replace('/');
+      // Usar window.location.href como fallback para problemas no Netlify
+      if (typeof window !== 'undefined') {
+        window.location.href = '/';
+      } else {
+        router.replace('/');
+      }
     }
   }, [isAuthenticated, authLoading, router, isMounted]);
 
@@ -115,14 +120,24 @@ export default function LoginPage() {
     }
     setShowPWAPrompt(false);
     console.log('🔄 LoginPage: Redirecionando para /');
-    router.replace('/');
+    // Usar window.location.href como fallback para problemas no Netlify
+    if (typeof window !== 'undefined') {
+      window.location.href = '/';
+    } else {
+      router.replace('/');
+    }
   };
 
   const skipPWA = () => {
     console.log('⏭️ PWA: Instalação ignorada');
     setShowPWAPrompt(false);
     console.log('🔄 LoginPage: Redirecionando para /');
-    router.replace('/');
+    // Usar window.location.href como fallback para problemas no Netlify
+    if (typeof window !== 'undefined') {
+      window.location.href = '/';
+    } else {
+      router.replace('/');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -146,7 +161,12 @@ export default function LoginPage() {
           setShowPWAPrompt(true);
         } else {
           console.log('🔄 LoginPage: Redirecionando para /');
-          router.replace('/');
+          // Usar window.location.href como fallback para problemas no Netlify
+          if (typeof window !== 'undefined') {
+            window.location.href = '/';
+          } else {
+            router.replace('/');
+          }
         }
       } else {
         console.log('❌ LoginPage: Login falhou -', result.error);
