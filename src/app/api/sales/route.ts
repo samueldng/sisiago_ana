@@ -4,10 +4,6 @@ import { z } from 'zod'
 import { triggerDashboardUpdateServer } from '@/utils/dashboardUpdater'
 import { createAuditLog } from '@/lib/supabase'
 
-// Forçar revalidação a cada requisição
-export const revalidate = 0
-export const dynamic = 'force-dynamic'
-
 // Schema de validação para criação de venda
 const createSaleSchema = z.object({
   items: z.array(z.object({

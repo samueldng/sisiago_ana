@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Configurações de build
-  output: 'standalone',
+  trailingSlash: true,
   poweredByHeader: false,
   compress: true,
   

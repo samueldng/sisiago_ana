@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 
-// Forçar revalidação a cada requisição
-export const revalidate = 0
-export const dynamic = 'force-dynamic'
-
 export async function GET(request: NextRequest) {
   try {
     // Data de hoje (início e fim do dia)

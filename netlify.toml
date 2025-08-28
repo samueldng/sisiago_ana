@@ -5,18 +5,8 @@
   publish = ".next"
   environment = { NODE_VERSION = "18" }
 
-# Configuração para API routes do Next.js
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
-  status = 200
-  force = true
-
-# Fallback para SPA
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Configuração para Next.js no Netlify
+# As rotas de API são automaticamente gerenciadas pelo Next.js
 
 # Headers para segurança
 [[headers]]

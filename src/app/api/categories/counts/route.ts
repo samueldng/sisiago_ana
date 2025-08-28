@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 
-// Forçar renderização dinâmica
-export const dynamic = 'force-dynamic'
-
 export async function GET(request: NextRequest) {
   try {
     // Buscar todos os produtos com suas categorias
